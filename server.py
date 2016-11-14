@@ -22,18 +22,30 @@ class webservice:
 		tree = ET.parse('MovieAll_SPN.xml')
 		root = tree.getroot()
 		for movie in root.findall('movie'):
-			for name_ in movie.find('name'):
-				if name_.text == name:
-					root = movie.getparent()
-					root.remove(movie)
+			if name == movie.find('name').text:
+				root = movie.getparent()
+				root.remove(movie)
 					#list_.append(movie.find('actor').text)
        # return list_
-	   
-	def test(self):
-		return 'aaaaa'
-		
+	def addtimeandresolution(self)
+	    tree = ET.parse('MovieAll_SPN.xml')
+		root = tree.getroot()
+		for movie in root.findall('movie'):
+			#for add time
+			time_tag = ET.Element('time')
+			time_tag.text = time
+			
+			#for add resolution
+			resolution_tag = ET.Element('resolution')
+			resolution_tag.text = resolution
+				
+			movie.append(time_tag)
+			movie.append(resolution_tag)
+				
+		tree.write('MovieAll_SPN.xml')
+		return "time and resolution added"
 	
-    def update_xml(self,name,type,name_actor,Director,day,month,year):
+    def update_xml(self,name,type,name_actor,Director,day,month,year,time,resolution):
         tree = ET.parse('MovieAll_SPN.xml')
         root = tree.getroot()
         new_tag = ET.Element('movie')
@@ -63,11 +75,15 @@ class webservice:
         date_tag.append(day_tag)
         date_tag.append(month_tag)
         date_tag.append(year_tag)
+		
         new_tag.append(name_tag)
         new_tag.append(types_tag)
         new_tag.append(stars_tag)
         new_tag.append(director_tag)
         new_tag.append(date_tag)
+		new_tag.append(time_tag)
+		new_tag.append(resolution_tag)
+		
         root.insert(0,new_tag)
         tree.write('MovieAll_SPN.xml')
 
