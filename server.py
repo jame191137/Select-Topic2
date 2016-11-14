@@ -27,7 +27,7 @@ class webservice:
 				root.remove(movie)
 					#list_.append(movie.find('actor').text)
        # return list_
-	def addtimeandresolution(self)
+	def addtimeandresolution(self,time,resolution)
 	    tree = ET.parse('MovieAll_SPN.xml')
 		root = tree.getroot()
 		for movie in root.findall('movie'):
